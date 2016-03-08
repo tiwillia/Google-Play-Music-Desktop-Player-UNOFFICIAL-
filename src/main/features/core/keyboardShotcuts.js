@@ -1,21 +1,40 @@
 import _ from 'lodash';
 import { globalShortcut } from 'electron';
 
-globalShortcut.register('MediaPreviousTrack', () => {
-  Emitter.sendToGooglePlayMusic('playback:previousTrack');
-});
+if (process.platform === 'win32') {
+  const winGlobalShortcut = require('ll-keyboard-hook-win');
+  winGlobalShortcut.on('MediaPreviousTrack', () => {
+    Emitter.sendToGooglePlayMusic('playback:previousTrack');
+  });
 
-globalShortcut.register('MediaPlayPause', () => {
-  Emitter.sendToGooglePlayMusic('playback:playPause');
-});
+  winGlobalShortcut.on('MediaPlayPause', () => {
+    Emitter.sendToGooglePlayMusic('playback:playPause');
+  });
 
-globalShortcut.register('MediaNextTrack', () => {
-  Emitter.sendToGooglePlayMusic('playback:nextTrack');
-});
+  winGlobalShortcut.on('MediaNextTrack', () => {
+    Emitter.sendToGooglePlayMusic('playback:nextTrack');
+  });
 
-globalShortcut.register('MediaStop', () => {
-  Emitter.sendToGooglePlayMusic('playback:stop');
-});
+  winGlobalShortcut.on('MediaStop', () => {
+    Emitter.sendToGooglePlayMusic('playback:stop');
+  });
+} else {
+  globalShortcut.register('MediaPreviousTrack', () => {
+    Emitter.sendToGooglePlayMusic('playback:previousTrack');
+  });
+
+  globalShortcut.register('MediaPlayPause', () => {
+    Emitter.sendToGooglePlayMusic('playback:playPause');
+  });
+
+  globalShortcut.register('MediaNextTrack', () => {
+    Emitter.sendToGooglePlayMusic('playback:nextTrack');
+  });
+
+  globalShortcut.register('MediaStop', () => {
+    Emitter.sendToGooglePlayMusic('playback:stop');
+  });
+}
 
 const customHotkeysTemplate = {
   playPause: null,
