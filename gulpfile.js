@@ -202,9 +202,19 @@ gulp.task('make:darwin', ['package:darwin'], (done) => {
 });
 
 gulp.task('package:linux', ['clean-dist-linux', 'build'], (done) => {
+  console.log('###################');
+  console.log('###################');
+  console.log('###### 64 BIT #####');
+  console.log('###################');
+  console.log('###################');
   rebuild('./rebuild.sh')
   .then(() => {
     packager(_.extend({}, defaultPackageConf, { platform: 'linux', arch: 'x64' }), () => {
+      console.log('###################');
+      console.log('###################');
+      console.log('###### 32 BIT #####');
+      console.log('###################');
+      console.log('###################');
       rebuild('./rebuild_ia32.sh')
       .then(() => {
         packager(_.extend({}, defaultPackageConf, { platform: 'linux', arch: 'ia32' }), done);
