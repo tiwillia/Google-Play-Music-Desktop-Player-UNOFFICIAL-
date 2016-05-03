@@ -1,0 +1,3 @@
+[submodule "src/inject/GPMWebView/chromecast"]
+	path = src/inject/GPMWebView/chromecast
+	url = https://github.com/GPMDP/electron-chromecast.git
